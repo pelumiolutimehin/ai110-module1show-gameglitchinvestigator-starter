@@ -2,25 +2,6 @@ import random
 import streamlit as st
 
 
-def parse_guess(raw: str):
-    if raw is None:
-        return False, None, "Enter a guess."
-
-    if raw == "":
-        return False, None, "Enter a guess."
-
-    try:
-        if "." in raw:
-            value = int(float(raw))
-        else:
-            value = int(raw)
-    except Exception:
-        return False, None, "That is not a number."
-
-    return True, value, None
-
-
-
 def update_score(current_score: int, outcome: str, attempt_number: int):
     if outcome == "Win":
         points = 100 - 10 * (attempt_number + 1)
@@ -40,6 +21,7 @@ def update_score(current_score: int, outcome: str, attempt_number: int):
 from logic_utils import (
     check_guess,
     get_range_for_difficulty,
+    parse_guess,
 )
 
 st.set_page_config(page_title="Glitchy Guesser", page_icon="🎮")
