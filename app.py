@@ -1,15 +1,6 @@
 import random
 import streamlit as st
 
-def get_range_for_difficulty(difficulty: str):
-    if difficulty == "Easy":
-        return 1, 20
-    if difficulty == "Normal":
-        return 1, 100
-    if difficulty == "Hard":
-        return 1, 50
-    return 1, 100
-
 
 def parse_guess(raw: str):
     if raw is None:
@@ -48,6 +39,7 @@ def update_score(current_score: int, outcome: str, attempt_number: int):
     return current_score
 from logic_utils import (
     check_guess,
+    get_range_for_difficulty,
 )
 
 st.set_page_config(page_title="Glitchy Guesser", page_icon="🎮")
@@ -93,7 +85,7 @@ if "history" not in st.session_state:
 st.subheader("Make a guess")
 
 st.info(
-    f"Guess a number between 1 and 100. "
+    f"Guess a number between {low} and {high}. "
     f"Attempts left: {attempt_limit - st.session_state.attempts}"
 )
 
