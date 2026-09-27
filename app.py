@@ -72,7 +72,6 @@ with col1:
 with col2:
     new_game = st.button("New Game 🔁")
 with col3:
-    # FIXME: On clicking show hint on an already won game, it causes the developer debug info to disappear
     show_hint = st.checkbox("Show hint", value=True)
 
 if new_game:
@@ -89,9 +88,8 @@ if st.session_state.status != "playing":
         st.success("You already won. Start a new game to play again.")
     else:
         st.error("Game over. Start a new game to try again.")
-    st.stop()
 
-if submit:
+if submit and st.session_state.status == "playing":
     st.session_state.attempts += 1
 
     ok, guess_int, err = parse_guess(raw_guess)
