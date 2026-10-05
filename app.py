@@ -33,6 +33,7 @@ low, high = get_range_for_difficulty(difficulty)
 st.sidebar.caption(f"Range: {low} to {high}")
 st.sidebar.caption(f"Attempts allowed: {attempt_limit}")
 
+# FIX: Updated logic to update the secret number to match valid range on difficulty change using ask mode and manually making the changes
 if st.session_state.get("difficulty") != difficulty:
     st.session_state.difficulty = difficulty
     st.session_state.secret = random.randint(low, high)
@@ -74,6 +75,7 @@ with col2:
 with col3:
     show_hint = st.checkbox("Show hint", value=True)
 
+# FIX: Fixed bug where the game was unable to restart using agent mode
 if new_game:
     st.session_state.attempts = 0
     st.session_state.secret = random.randint(low, high)
@@ -132,11 +134,13 @@ if submit and st.session_state.status == "playing":
                     f"Score: {st.session_state.score}"
                 )
 
+# FIX: Updated header logic to display correct range based on difficulty using ask mode and manually making the code changes
 attempts_placeholder.info(
     f"Guess a number between {low} and {high}. "
     f"Attempts left: {attempt_limit - st.session_state.attempts}"
 )
 
+# FIX: Updated logic to correctly log a user's attempt on incorrect guesses using agent mode
 with debug_placeholder.container():
     with st.expander("Developer Debug Info"):
         st.write("Secret:", st.session_state.secret)

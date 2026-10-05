@@ -1,3 +1,4 @@
+# FIX: Refactored difficulty range logic into logic_utils.py using agent mode
 def get_range_for_difficulty(difficulty: str):
     """Return (low, high) inclusive range for a given difficulty."""
     if difficulty == "Easy":
@@ -15,6 +16,7 @@ def parse_guess(raw: str):
 
     Returns: (ok: bool, guess_int: int | None, error_message: str | None)
     """
+    # FIX: Refactored guess parsing logic into logic_utils.py using agent mode
     if raw is None:
         return False, None, "Enter a guess."
 
@@ -38,6 +40,7 @@ def check_guess(guess, secret):
 
     outcome examples: "Win", "Too High", "Too Low"
     """
+    # FIX: Refactored guess checking logic into logic_utils.py using agent mode
     secret_int = int(secret)
 
     if guess == secret_int:
@@ -51,6 +54,7 @@ def check_guess(guess, secret):
 
 def update_score(current_score: int, outcome: str, attempt_number: int):
     """Update score based on outcome and attempt number."""
+    # FIX: Refactored score updating logic into logic_utils.py using agent mode
     if outcome == "Win":
         points = 100 - 10 * (attempt_number + 1)
         if points < 10:
